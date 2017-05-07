@@ -2,7 +2,7 @@
 
 Single View Application developed in Swift 3 and XCode 8 for testing purposes.
 
-<img src="http://oi64.tinypic.com/15s7ux1.jpg" />
+<img src="http://oi64.tinypic.com/15s7ux1.jpg" height="40%" width="40%" />
 _______________________________________
 
 ## 1. Download the project.
