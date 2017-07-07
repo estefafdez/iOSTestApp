@@ -2,7 +2,8 @@
 
 Single View Application developed in Swift 3 and XCode 8 for testing purposes.
 
-<center><img height="40%" width="40%" src="http://i229.photobucket.com/albums/ee100/osdia2/iosApp.gif"/></center>
+<img src="http://i229.photobucket.com/albums/ee100/osdia2/swiftxcode.png"/>
+<img height="40%" width="40%" src="http://i229.photobucket.com/albums/ee100/osdia2/iosApp.gif"/>
 _______________________________________
 
 ## 1. Download the project.
