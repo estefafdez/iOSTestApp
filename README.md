@@ -6,7 +6,7 @@ Single View Application developed in Swift 3 and XCode 8 for testing purposes.
 <img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gifv"/>
 _______________________________________
 
-## 1. Download the project.
+## 1. Download the project. 
 
 In order to start using the project you need to create your own Fork on Github and then clone the project:
 
