@@ -3,7 +3,7 @@
 Single View Application developed in Swift 3 and XCode 8 for testing purposes.
 
 <img src="http://i.imgur.com/4JUKNuC.png"/>
-<img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gifv"/>
+<img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gif"/>
 _______________________________________
 
 ## 1. Download the project. 
