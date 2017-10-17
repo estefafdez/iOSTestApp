@@ -11,7 +11,6 @@
 		263CF4BD1EBF296200311761 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CF4BC1EBF296200311761 /* ViewController.swift */; };
 		263CF4C01EBF296200311761 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 263CF4BE1EBF296200311761 /* Main.storyboard */; };
 		263CF4C21EBF296200311761 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263CF4C11EBF296200311761 /* Assets.xcassets */; };
-		263CF4C51EBF296200311761 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 263CF4C31EBF296200311761 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +19,6 @@
 		263CF4BC1EBF296200311761 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		263CF4BF1EBF296200311761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		263CF4C11EBF296200311761 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		263CF4C41EBF296200311761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		263CF4C61EBF296200311761 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +56,6 @@
 				263CF4BC1EBF296200311761 /* ViewController.swift */,
 				263CF4BE1EBF296200311761 /* Main.storyboard */,
 				263CF4C11EBF296200311761 /* Assets.xcassets */,
-				263CF4C31EBF296200311761 /* LaunchScreen.storyboard */,
 				263CF4C61EBF296200311761 /* Info.plist */,
 			);
 			path = TestApp;
@@ -125,7 +122,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				263CF4C51EBF296200311761 /* LaunchScreen.storyboard in Resources */,
 				263CF4C21EBF296200311761 /* Assets.xcassets in Resources */,
 				263CF4C01EBF296200311761 /* Main.storyboard in Resources */,
 			);
@@ -152,14 +148,6 @@
 				263CF4BF1EBF296200311761 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		263CF4C31EBF296200311761 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				263CF4C41EBF296200311761 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -279,7 +267,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estefafdez.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -293,7 +281,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estefafdez.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
