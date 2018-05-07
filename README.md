@@ -31,12 +31,18 @@ http://www.fitzweekly.com/2016/11/how-to-export-xcode-project-to-ipa-file.html
 
 and follow the instructions. 
 
-If not, the .ipa file is already available on this project. 
+## 4. Get the app file. 
 
-## 4. Future improvements. 
+To be able to test your app using Appium, you need to get the .app file. In order to obtain it, you need to click on Product -> Build. 
+
+Once the build is done, you can find the .app file in the following path:
+
+~/Library/Developer/Xcode/DerivedData/{app name}/Build/Products/{your-compilation(debug, release...)}/ {yourpp.app}
+
+## 5. Future improvements. 
 This app was build on a single day, I will be uploading new version with more functionalities to test. If you want to collaborate and add new functionalities, please create a pull request into this repository. 
 
-## 5. Enjoy!
+## 6. Enjoy!
 
 Enjoy your testing!
 
