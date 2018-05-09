@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         sliderButton.minimumValue = 10
         sliderButton.value = 20
         sliderButton.maximumValue = 50
-        
+        switchButton.isHidden=false
     }
 
     override func didReceiveMemoryWarning() {
