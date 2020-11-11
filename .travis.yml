@@ -1,5 +1,25 @@
-osx_image: xcode12
-addons:
-  homebrew:
-    taps: homebrew/cask-versions
-    casks: java8
+language: objective-c
+osx_image: xcode12.2
+
+script:
+- xcodebuild -workspace TestApp.xcodeproj/project.xcworkspace -scheme TestApp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+
+notifications:
+  email:
+    recipients:
+      - estefafdez@gmail.com
+    on_success: always 
+    on_failure: always 
+
+  slack:
+    - rooms:
+      - d-conspiratorios:xzIh8oGD67pRkmgHlnz8moKY
+      on_success: always
+      on_failure: always
+      template:
+        - "Repo `%{repository_slug}` *%{result}* build (<%{build_url}|#%{build_number}>) for commit (<%{compare_url}|%{commit}>) on branch `%{branch}`."
+        - "Execution time: *%{duration}*"
+        - "Message: %{message}"
+
+
+
