@@ -1,6 +1,6 @@
 os: osx
 osx_image: xcode12.2
-language: swift
+language: objective-c
 
 script:
 - xcodebuild -workspace TestApp.xcodeproj/project.xcworkspace -scheme TestApp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
