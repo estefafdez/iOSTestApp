@@ -2,6 +2,8 @@
 
 Single View Application developed in Swift 4 and XCode 8 for testing purposes.
 
+[![Build Status](https://travis-ci.com/estefafdez/iOSTestApp.svg?branch=master)](https://travis-ci.com/estefafdez/iOSTestApp)
+
 <img src="http://i.imgur.com/4JUKNuC.png"/>
 <img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gif"/>
 _______________________________________
