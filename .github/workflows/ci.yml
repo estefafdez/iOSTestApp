@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build for the iOS simulator
+        run: |
+          xcodebuild -project TestApp.xcodeproj -scheme TestApp -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO build

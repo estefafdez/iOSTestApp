@@ -2,7 +2,7 @@
 
 Single View Application developed in Swift 4 and XCode 8 for testing purposes.
 
-[![Build Status](https://travis-ci.com/estefafdez/iOSTestApp.svg?branch=master)](https://travis-ci.com/estefafdez/iOSTestApp)
+[![CI](https://github.com/estefafdez/iOSTestApp/actions/workflows/ci.yml/badge.svg)](https://github.com/estefafdez/iOSTestApp/actions/workflows/ci.yml)
 
 <img src="http://i.imgur.com/4JUKNuC.png"/>
 <img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gif"/>
@@ -47,4 +47,3 @@ This app was build on a single day, I will be uploading new version with more fu
 ## 6. Enjoy!
 
 Enjoy your testing!
-
