@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: macos-latest
     permissions:
-      contents: read
+      contents: write # push the coverage badge to the badges branch
       checks: write
       pull-requests: write
     steps:
@@ -24,7 +24,7 @@ jobs:
           set -o pipefail
           xcodebuild test -project TestApp.xcodeproj -scheme TestApp \
             -destination "platform=iOS Simulator,id=$DEVICE_ID" \
-            -resultBundlePath TestResults.xcresult \
+            -enableCodeCoverage YES -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO 2>&1 | tee xcodebuild.log || status=$?
           if [ "${status:-0}" -ne 0 ]; then
             grep -E "error:|Test Case .* failed|TEST FAILED|Testing failed" xcodebuild.log | head -20 | while read -r line; do echo "::error::$line"; done
@@ -43,3 +43,31 @@ jobs:
         with:
           files: junit.xml
           comment_title: Test Results
+
+      - name: Compute line coverage
+        id: coverage
+        run: |
+          pct=$(xcrun xccov view --report --json TestResults.xcresult | jq -r '[.targets[] | select(.name | endswith(".app"))][0].lineCoverage * 100 | round')
+          echo "pct=$pct" >> "$GITHUB_OUTPUT"
+          echo "### Line coverage: ${pct}%" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish coverage badge
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          PCT: ${{ steps.coverage.outputs.pct }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$PCT" -ge 80 ]; then color=brightgreen; elif [ "$PCT" -ge 60 ]; then color=yellow; else color=red; fi
+          url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$url" badges > /dev/null; then
+            git clone --depth 1 --branch badges "$url" "$RUNNER_TEMP/badges"
+          else
+            git init -b badges "$RUNNER_TEMP/badges"
+          fi
+          cd "$RUNNER_TEMP/badges"
+          printf '{"schemaVersion":1,"label":"coverage","message":"%s%%","color":"%s"}\n' "$PCT" "$color" > coverage.json
+          git add coverage.json
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "chore: update coverage badge to ${PCT}%"
+            git push "$url" HEAD:badges
+          fi
