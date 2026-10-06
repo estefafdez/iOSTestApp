@@ -3,6 +3,7 @@
 Single View Application developed in Swift 4 and XCode 8 for testing purposes.
 
 [![CI](https://github.com/estefafdez/iOSTestApp/actions/workflows/ci.yml/badge.svg)](https://github.com/estefafdez/iOSTestApp/actions/workflows/ci.yml)
+![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Festefafdez%2FiOSTestApp%2Fbadges%2Fcoverage.json)
 
 <img src="http://i.imgur.com/4JUKNuC.png"/>
 <img height="40%" width="40%" src="http://i.imgur.com/nwsbQSl.gif"/>
