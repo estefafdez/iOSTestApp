@@ -9,6 +9,10 @@ on:
 jobs:
   build-and-test:
     runs-on: macos-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v7
       - name: Pick an iPhone simulator
@@ -20,8 +24,22 @@ jobs:
           set -o pipefail
           xcodebuild test -project TestApp.xcodeproj -scheme TestApp \
             -destination "platform=iOS Simulator,id=$DEVICE_ID" \
+            -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO 2>&1 | tee xcodebuild.log || status=$?
           if [ "${status:-0}" -ne 0 ]; then
             grep -E "error:|Test Case .* failed|TEST FAILED|Testing failed" xcodebuild.log | head -20 | while read -r line; do echo "::error::$line"; done
             exit "$status"
           fi
+      - name: Convert the result bundle to JUnit XML
+        if: always()
+        run: |
+          brew install a7ex/homebrew-formulae/xcresultparser
+          xcresultparser --output-format junit TestResults.xcresult > junit.xml
+
+      # Fork PRs get a read-only token, so only publish for branches of this repo.
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        with:
+          files: junit.xml
+          comment_title: Test Results
