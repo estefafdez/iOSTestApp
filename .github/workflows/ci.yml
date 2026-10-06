@@ -17,6 +17,11 @@ jobs:
           echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
       - name: Build and run the unit tests
         run: |
+          set -o pipefail
           xcodebuild test -project TestApp.xcodeproj -scheme TestApp \
             -destination "platform=iOS Simulator,id=$DEVICE_ID" \
-            CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee xcodebuild.log || status=$?
+          if [ "${status:-0}" -ne 0 ]; then
+            grep -E "error:|Test Case .* failed|TEST FAILED|Testing failed" xcodebuild.log | head -20 | while read -r line; do echo "::error::$line"; done
+            exit "$status"
+          fi
