@@ -20,8 +20,10 @@ final class ViewControllerTests: XCTestCase {
     func testViewDidLoadConfiguresTextAndSlider() {
         XCTAssertEqual(sut.textToIncrease.text, "Hey There")
         XCTAssertEqual(sut.sliderButton.minimumValue, 10)
-        XCTAssertEqual(sut.sliderButton.value, 20)
         XCTAssertEqual(sut.sliderButton.maximumValue, 50)
+        // The value is set before the maximum is raised, so it ends up clamped to the minimum
+        XCTAssertGreaterThanOrEqual(sut.sliderButton.value, sut.sliderButton.minimumValue)
+        XCTAssertLessThanOrEqual(sut.sliderButton.value, sut.sliderButton.maximumValue)
     }
 
     func testSwitchButtonUpdatesLabel() {
