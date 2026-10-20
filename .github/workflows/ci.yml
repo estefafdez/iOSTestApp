@@ -30,6 +30,20 @@ jobs:
             grep -E "error:|Test Case .* failed|TEST FAILED|Testing failed" xcodebuild.log | head -20 | while read -r line; do echo "::error::$line"; done
             exit "$status"
           fi
+      - name: Export UI test screenshots
+        if: always()
+        run: |
+          mkdir -p screenshots
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path screenshots || echo "no attachments to export"
+
+      - name: Upload screenshots artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-screenshots
+          path: screenshots/
+          if-no-files-found: ignore
+
       - name: Convert the result bundle to JUnit XML
         if: always()
         run: |
