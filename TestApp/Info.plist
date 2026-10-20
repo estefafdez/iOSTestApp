@@ -32,5 +32,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Esta app de laboratorio usa tu ubicación para probar flujos de permisos en tests.</string>
 </dict>
 </plist>
