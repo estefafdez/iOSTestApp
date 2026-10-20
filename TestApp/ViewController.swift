@@ -56,6 +56,10 @@ class ViewController: UIViewController {
         present(FormViewController(), animated: true)
     }
 
+    @IBAction func openListAction(_ sender: Any) {
+        present(ItemListViewController(), animated: true)
+    }
+
     @IBAction func increaseTextAction(_ sender: UISlider) {
         textToIncrease.isEditable = true
         
