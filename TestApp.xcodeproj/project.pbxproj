@@ -29,6 +29,11 @@
 		AE0000000000000000000004 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000003 /* LocationPermissionViewController.swift */; };
 		AE0000000000000000000006 /* LocationStatusFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000005 /* LocationStatusFormatterTests.swift */; };
 		AE0000000000000000000008 /* LocationPermissionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000007 /* LocationPermissionUITests.swift */; };
+		AF0000000000000000000002 /* AppearanceScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0000000000000000000001 /* AppearanceScenario.swift */; };
+		AF0000000000000000000004 /* AppearanceStatusFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0000000000000000000003 /* AppearanceStatusFormatter.swift */; };
+		AF0000000000000000000006 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0000000000000000000005 /* AppearanceViewController.swift */; };
+		AF0000000000000000000008 /* AppearanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0000000000000000000007 /* AppearanceTests.swift */; };
+		AF000000000000000000000A /* AppearanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0000000000000000000009 /* AppearanceUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +80,11 @@
 		AE0000000000000000000003 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		AE0000000000000000000005 /* LocationStatusFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStatusFormatterTests.swift; sourceTree = "<group>"; };
 		AE0000000000000000000007 /* LocationPermissionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionUITests.swift; sourceTree = "<group>"; };
+		AF0000000000000000000001 /* AppearanceScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceScenario.swift; sourceTree = "<group>"; };
+		AF0000000000000000000003 /* AppearanceStatusFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceStatusFormatter.swift; sourceTree = "<group>"; };
+		AF0000000000000000000005 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		AF0000000000000000000007 /* AppearanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTests.swift; sourceTree = "<group>"; };
+		AF0000000000000000000009 /* AppearanceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +145,9 @@
 				AD0000000000000000000003 /* FavoritesViewController.swift */,
 				AE0000000000000000000001 /* LocationStatusFormatter.swift */,
 				AE0000000000000000000003 /* LocationPermissionViewController.swift */,
+				AF0000000000000000000001 /* AppearanceScenario.swift */,
+				AF0000000000000000000003 /* AppearanceStatusFormatter.swift */,
+				AF0000000000000000000005 /* AppearanceViewController.swift */,
 				263CF4BE1EBF296200311761 /* Main.storyboard */,
 				263CF4C11EBF296200311761 /* Assets.xcassets */,
 				263CF4C61EBF296200311761 /* Info.plist */,
@@ -150,6 +163,7 @@
 				AC0000000000000000000005 /* ItemStoreTests.swift */,
 				AD0000000000000000000005 /* FavoritesStoreTests.swift */,
 				AE0000000000000000000005 /* LocationStatusFormatterTests.swift */,
+				AF0000000000000000000007 /* AppearanceTests.swift */,
 			);
 			path = TestAppTests;
 			sourceTree = "<group>";
@@ -162,6 +176,7 @@
 				AC0000000000000000000007 /* ListUITests.swift */,
 				AD0000000000000000000007 /* FavoritesUITests.swift */,
 				AE0000000000000000000007 /* LocationPermissionUITests.swift */,
+				AF0000000000000000000009 /* AppearanceUITests.swift */,
 			);
 			path = TestAppUITests;
 			sourceTree = "<group>";
@@ -310,6 +325,9 @@
 				AD0000000000000000000004 /* FavoritesViewController.swift in Sources */,
 				AE0000000000000000000002 /* LocationStatusFormatter.swift in Sources */,
 				AE0000000000000000000004 /* LocationPermissionViewController.swift in Sources */,
+				AF0000000000000000000002 /* AppearanceScenario.swift in Sources */,
+				AF0000000000000000000004 /* AppearanceStatusFormatter.swift in Sources */,
+				AF0000000000000000000006 /* AppearanceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +340,7 @@
 				AC0000000000000000000006 /* ItemStoreTests.swift in Sources */,
 				AD0000000000000000000006 /* FavoritesStoreTests.swift in Sources */,
 				AE0000000000000000000006 /* LocationStatusFormatterTests.swift in Sources */,
+				AF0000000000000000000008 /* AppearanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +353,7 @@
 				AC0000000000000000000008 /* ListUITests.swift in Sources */,
 				AD0000000000000000000008 /* FavoritesUITests.swift in Sources */,
 				AE0000000000000000000008 /* LocationPermissionUITests.swift in Sources */,
+				AF000000000000000000000A /* AppearanceUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

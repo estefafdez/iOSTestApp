@@ -68,6 +68,10 @@ class ViewController: UIViewController {
         present(LocationPermissionViewController(), animated: true)
     }
 
+    @IBAction func openAppearanceAction(_ sender: Any) {
+        present(AppearanceViewController(), animated: true)
+    }
+
     @IBAction func increaseTextAction(_ sender: UISlider) {
         textToIncrease.isEditable = true
         
