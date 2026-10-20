@@ -107,13 +107,23 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xL1-st-001">
-                            <rect key="frame" x="147" y="616" width="80" height="30"/>
+                            <rect key="frame" x="90" y="616" width="80" height="30"/>
                             <state key="normal" title="Lista"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="open_list_button"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="openListAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xL1-st-002"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF1-st-001">
+                            <rect key="frame" x="185" y="616" width="90" height="30"/>
+                            <state key="normal" title="Favoritos"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="open_favorites_button"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="openFavoritesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xF1-st-002"/>
                             </connections>
                         </button>
                         </subviews>

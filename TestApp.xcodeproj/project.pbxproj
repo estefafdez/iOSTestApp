@@ -21,6 +21,10 @@
 		AC0000000000000000000004 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000003 /* ItemListViewController.swift */; };
 		AC0000000000000000000006 /* ItemStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000005 /* ItemStoreTests.swift */; };
 		AC0000000000000000000008 /* ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000007 /* ListUITests.swift */; };
+		AD0000000000000000000002 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001 /* FavoritesStore.swift */; };
+		AD0000000000000000000004 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000003 /* FavoritesViewController.swift */; };
+		AD0000000000000000000006 /* FavoritesStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000005 /* FavoritesStoreTests.swift */; };
+		AD0000000000000000000008 /* FavoritesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000007 /* FavoritesUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		AC0000000000000000000003 /* ItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		AC0000000000000000000005 /* ItemStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStoreTests.swift; sourceTree = "<group>"; };
 		AC0000000000000000000007 /* ListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUITests.swift; sourceTree = "<group>"; };
+		AD0000000000000000000001 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
+		AD0000000000000000000003 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		AD0000000000000000000005 /* FavoritesStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStoreTests.swift; sourceTree = "<group>"; };
+		AD0000000000000000000007 /* FavoritesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,8 @@
 				AB0000000000000000000003 /* FormViewController.swift */,
 				AC0000000000000000000001 /* ItemStore.swift */,
 				AC0000000000000000000003 /* ItemListViewController.swift */,
+				AD0000000000000000000001 /* FavoritesStore.swift */,
+				AD0000000000000000000003 /* FavoritesViewController.swift */,
 				263CF4BE1EBF296200311761 /* Main.storyboard */,
 				263CF4C11EBF296200311761 /* Assets.xcassets */,
 				263CF4C61EBF296200311761 /* Info.plist */,
@@ -128,6 +138,7 @@
 				263CF4D01EBF296200311761 /* ViewControllerTests.swift */,
 				AB0000000000000000000005 /* FormValidatorTests.swift */,
 				AC0000000000000000000005 /* ItemStoreTests.swift */,
+				AD0000000000000000000005 /* FavoritesStoreTests.swift */,
 			);
 			path = TestAppTests;
 			sourceTree = "<group>";
@@ -138,6 +149,7 @@
 				AA0000000000000000000002 /* TestAppUITests.swift */,
 				AB0000000000000000000007 /* FormUITests.swift */,
 				AC0000000000000000000007 /* ListUITests.swift */,
+				AD0000000000000000000007 /* FavoritesUITests.swift */,
 			);
 			path = TestAppUITests;
 			sourceTree = "<group>";
@@ -282,6 +294,8 @@
 				AB0000000000000000000004 /* FormViewController.swift in Sources */,
 				AC0000000000000000000002 /* ItemStore.swift in Sources */,
 				AC0000000000000000000004 /* ItemListViewController.swift in Sources */,
+				AD0000000000000000000002 /* FavoritesStore.swift in Sources */,
+				AD0000000000000000000004 /* FavoritesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +306,7 @@
 				263CF4D11EBF296200311761 /* ViewControllerTests.swift in Sources */,
 				AB0000000000000000000006 /* FormValidatorTests.swift in Sources */,
 				AC0000000000000000000006 /* ItemStoreTests.swift in Sources */,
+				AD0000000000000000000006 /* FavoritesStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +317,7 @@
 				AA0000000000000000000001 /* TestAppUITests.swift in Sources */,
 				AB0000000000000000000008 /* FormUITests.swift in Sources */,
 				AC0000000000000000000008 /* ListUITests.swift in Sources */,
+				AD0000000000000000000008 /* FavoritesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
