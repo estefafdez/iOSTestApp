@@ -19,6 +19,10 @@ jobs:
         run: |
           DEVICE_ID=$(xcrun simctl list devices available iPhone | grep -m1 -oE '[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}')
           echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+      - name: Reset simulator privacy permissions
+        run: |
+          xcrun simctl boot "$DEVICE_ID" || true
+          xcrun simctl privacy "$DEVICE_ID" reset all com.estefafdez.TestApp
       - name: Build and run the unit tests
         run: |
           set -o pipefail
