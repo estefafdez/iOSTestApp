@@ -106,6 +106,16 @@
                                 <action selector="openFormAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xF0-rm-002"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xL1-st-001">
+                            <rect key="frame" x="147" y="616" width="80" height="30"/>
+                            <state key="normal" title="Lista"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="open_list_button"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="openListAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xL1-st-002"/>
+                            </connections>
+                        </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
