@@ -126,6 +126,16 @@
                                 <action selector="openFavoritesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xF1-st-002"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xL2-lc-001">
+                            <rect key="frame" x="280" y="616" width="85" height="30"/>
+                            <state key="normal" title="Ubicación"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="open_location_button"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="openLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xL2-lc-002"/>
+                            </connections>
+                        </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

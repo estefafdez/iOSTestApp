@@ -25,6 +25,10 @@
 		AD0000000000000000000004 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000003 /* FavoritesViewController.swift */; };
 		AD0000000000000000000006 /* FavoritesStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000005 /* FavoritesStoreTests.swift */; };
 		AD0000000000000000000008 /* FavoritesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000007 /* FavoritesUITests.swift */; };
+		AE0000000000000000000002 /* LocationStatusFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000001 /* LocationStatusFormatter.swift */; };
+		AE0000000000000000000004 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000003 /* LocationPermissionViewController.swift */; };
+		AE0000000000000000000006 /* LocationStatusFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000005 /* LocationStatusFormatterTests.swift */; };
+		AE0000000000000000000008 /* LocationPermissionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0000000000000000000007 /* LocationPermissionUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		AD0000000000000000000003 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		AD0000000000000000000005 /* FavoritesStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStoreTests.swift; sourceTree = "<group>"; };
 		AD0000000000000000000007 /* FavoritesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUITests.swift; sourceTree = "<group>"; };
+		AE0000000000000000000001 /* LocationStatusFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStatusFormatter.swift; sourceTree = "<group>"; };
+		AE0000000000000000000003 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
+		AE0000000000000000000005 /* LocationStatusFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStatusFormatterTests.swift; sourceTree = "<group>"; };
+		AE0000000000000000000007 /* LocationPermissionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +133,8 @@
 				AC0000000000000000000003 /* ItemListViewController.swift */,
 				AD0000000000000000000001 /* FavoritesStore.swift */,
 				AD0000000000000000000003 /* FavoritesViewController.swift */,
+				AE0000000000000000000001 /* LocationStatusFormatter.swift */,
+				AE0000000000000000000003 /* LocationPermissionViewController.swift */,
 				263CF4BE1EBF296200311761 /* Main.storyboard */,
 				263CF4C11EBF296200311761 /* Assets.xcassets */,
 				263CF4C61EBF296200311761 /* Info.plist */,
@@ -139,6 +149,7 @@
 				AB0000000000000000000005 /* FormValidatorTests.swift */,
 				AC0000000000000000000005 /* ItemStoreTests.swift */,
 				AD0000000000000000000005 /* FavoritesStoreTests.swift */,
+				AE0000000000000000000005 /* LocationStatusFormatterTests.swift */,
 			);
 			path = TestAppTests;
 			sourceTree = "<group>";
@@ -150,6 +161,7 @@
 				AB0000000000000000000007 /* FormUITests.swift */,
 				AC0000000000000000000007 /* ListUITests.swift */,
 				AD0000000000000000000007 /* FavoritesUITests.swift */,
+				AE0000000000000000000007 /* LocationPermissionUITests.swift */,
 			);
 			path = TestAppUITests;
 			sourceTree = "<group>";
@@ -296,6 +308,8 @@
 				AC0000000000000000000004 /* ItemListViewController.swift in Sources */,
 				AD0000000000000000000002 /* FavoritesStore.swift in Sources */,
 				AD0000000000000000000004 /* FavoritesViewController.swift in Sources */,
+				AE0000000000000000000002 /* LocationStatusFormatter.swift in Sources */,
+				AE0000000000000000000004 /* LocationPermissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +321,7 @@
 				AB0000000000000000000006 /* FormValidatorTests.swift in Sources */,
 				AC0000000000000000000006 /* ItemStoreTests.swift in Sources */,
 				AD0000000000000000000006 /* FavoritesStoreTests.swift in Sources */,
+				AE0000000000000000000006 /* LocationStatusFormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +333,7 @@
 				AB0000000000000000000008 /* FormUITests.swift in Sources */,
 				AC0000000000000000000008 /* ListUITests.swift in Sources */,
 				AD0000000000000000000008 /* FavoritesUITests.swift in Sources */,
+				AE0000000000000000000008 /* LocationPermissionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
