@@ -52,6 +52,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func openFormAction(_ sender: Any) {
+        present(FormViewController(), animated: true)
+    }
+
     @IBAction func increaseTextAction(_ sender: UISlider) {
         textToIncrease.isEditable = true
         
@@ -63,4 +67,3 @@ class ViewController: UIViewController {
     
 
 }
-
