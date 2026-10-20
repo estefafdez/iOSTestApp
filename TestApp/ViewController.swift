@@ -60,6 +60,10 @@ class ViewController: UIViewController {
         present(ItemListViewController(), animated: true)
     }
 
+    @IBAction func openFavoritesAction(_ sender: Any) {
+        present(FavoritesViewController(), animated: true)
+    }
+
     @IBAction func increaseTextAction(_ sender: UISlider) {
         textToIncrease.isEditable = true
         
