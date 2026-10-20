@@ -20,11 +20,13 @@ final class AppearanceUITests: XCTestCase {
     func testAppearanceScreenshots() {
         openAppearance()
 
-        app.buttons["Claro"].tap()
+        let picker = app.segmentedControls["appearance_style_segmented"]
+
+        picker.buttons["Claro"].tap()
         XCTAssertTrue(app.staticTexts["Modo: Claro"].waitForExistence(timeout: 5))
         attachScreenshot(named: "apariencia-claro")
 
-        app.buttons["Oscuro"].tap()
+        picker.buttons["Oscuro"].tap()
         XCTAssertTrue(app.staticTexts["Modo: Oscuro"].waitForExistence(timeout: 5))
         attachScreenshot(named: "apariencia-oscuro")
     }
