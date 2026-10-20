@@ -68,7 +68,7 @@ final class AppearanceViewController: UIViewController {
             return
         }
         if #available(iOS 13.0, *) {
-            view.overrideUserInterfaceStyle = scenario.interfaceStyle
+            overrideUserInterfaceStyle = scenario.interfaceStyle
         }
         updateLabels()
     }
