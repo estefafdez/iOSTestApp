@@ -64,6 +64,10 @@ class ViewController: UIViewController {
         present(FavoritesViewController(), animated: true)
     }
 
+    @IBAction func openLocationAction(_ sender: Any) {
+        present(LocationPermissionViewController(), animated: true)
+    }
+
     @IBAction func increaseTextAction(_ sender: UISlider) {
         textToIncrease.isEditable = true
         
