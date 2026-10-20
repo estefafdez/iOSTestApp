@@ -38,9 +38,7 @@ final class LocationPermissionUITests: XCTestCase {
     func testRequestPermissionFlow() {
         openLocation()
         if app.staticTexts["Permiso sin decidir"].exists {
-            allowSystemLocationAlertIfShown()
-            app.buttons["location_request_button"].tap()
-            app.tap() // triggers the interruption monitor
+            requestPermissionAndAllow()
         }
         XCTAssertTrue(app.staticTexts["Permiso concedido (en uso)"].waitForExistence(timeout: 5))
     }
@@ -52,12 +50,21 @@ final class LocationPermissionUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Permiso sin decidir"].waitForExistence(timeout: 5))
         attachScreenshot(named: "ubicacion-sin-decidir")
 
-        allowSystemLocationAlertIfShown()
-        app.buttons["location_request_button"].tap()
-        app.tap() // triggers the interruption monitor
+        requestPermissionAndAllow()
 
         XCTAssertTrue(app.staticTexts["Permiso concedido (en uso)"].waitForExistence(timeout: 5))
         attachScreenshot(named: "ubicacion-con-permiso")
+    }
+
+    /// Requests the permission and accepts the system alert. The alert can take
+    /// a moment to appear, so wait for it before tapping the app: interruption
+    /// monitors only fire when a UI interaction finds the alert on screen.
+    private func requestPermissionAndAllow() {
+        allowSystemLocationAlertIfShown()
+        app.buttons["location_request_button"].tap()
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        _ = springboard.alerts.firstMatch.waitForExistence(timeout: 5)
+        app.tap() // triggers the interruption monitor
     }
 
     private func allowSystemLocationAlertIfShown() {
