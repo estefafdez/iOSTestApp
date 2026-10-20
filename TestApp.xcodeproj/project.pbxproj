@@ -13,6 +13,10 @@
 		263CF4C01EBF296200311761 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 263CF4BE1EBF296200311761 /* Main.storyboard */; };
 		263CF4C21EBF296200311761 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263CF4C11EBF296200311761 /* Assets.xcassets */; };
 		AA0000000000000000000001 /* TestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000002 /* TestAppUITests.swift */; };
+		AB0000000000000000000002 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001 /* FormValidator.swift */; };
+		AB0000000000000000000004 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000003 /* FormViewController.swift */; };
+		AB0000000000000000000006 /* FormValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000005 /* FormValidatorTests.swift */; };
+		AB0000000000000000000008 /* FormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000007 /* FormUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,10 @@
 		263CF4C61EBF296200311761 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0000000000000000000002 /* TestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppUITests.swift; sourceTree = "<group>"; };
 		AA0000000000000000000003 /* TestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB0000000000000000000001 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
+		AB0000000000000000000003 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		AB0000000000000000000005 /* FormValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidatorTests.swift; sourceTree = "<group>"; };
+		AB0000000000000000000007 /* FormUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +103,8 @@
 			children = (
 				263CF4BA1EBF296200311761 /* AppDelegate.swift */,
 				263CF4BC1EBF296200311761 /* ViewController.swift */,
+				AB0000000000000000000001 /* FormValidator.swift */,
+				AB0000000000000000000003 /* FormViewController.swift */,
 				263CF4BE1EBF296200311761 /* Main.storyboard */,
 				263CF4C11EBF296200311761 /* Assets.xcassets */,
 				263CF4C61EBF296200311761 /* Info.plist */,
@@ -106,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				263CF4D01EBF296200311761 /* ViewControllerTests.swift */,
+				AB0000000000000000000005 /* FormValidatorTests.swift */,
 			);
 			path = TestAppTests;
 			sourceTree = "<group>";
@@ -114,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0000000000000000000002 /* TestAppUITests.swift */,
+				AB0000000000000000000007 /* FormUITests.swift */,
 			);
 			path = TestAppUITests;
 			sourceTree = "<group>";
@@ -254,6 +266,8 @@
 			files = (
 				263CF4BD1EBF296200311761 /* ViewController.swift in Sources */,
 				263CF4BB1EBF296200311761 /* AppDelegate.swift in Sources */,
+				AB0000000000000000000002 /* FormValidator.swift in Sources */,
+				AB0000000000000000000004 /* FormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				263CF4D11EBF296200311761 /* ViewControllerTests.swift in Sources */,
+				AB0000000000000000000006 /* FormValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0000000000000000000001 /* TestAppUITests.swift in Sources */,
+				AB0000000000000000000008 /* FormUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
