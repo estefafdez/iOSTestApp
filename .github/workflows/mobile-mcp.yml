@@ -29,6 +29,9 @@ jobs:
           echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
           xcrun simctl boot "$DEVICE_ID" || true
 
+      - name: Reset simulator privacy permissions
+        run: xcrun simctl privacy "$DEVICE_ID" reset all com.estefafdez.TestApp
+
       - name: Build TestApp for the simulator
         run: |
           set -o pipefail
@@ -70,6 +73,14 @@ jobs:
           echo "Using app at $APP_PATH"
           node run-mobile-mcp-tests.ts --app "$APP_PATH" --out "$GITHUB_WORKSPACE/screenshots"
 
+      - name: Diagnose launch problems
+        if: failure()
+        run: |
+          xcrun simctl launch "$DEVICE_ID" com.estefafdez.TestApp || true
+          sleep 5
+          xcrun simctl spawn "$DEVICE_ID" log show --last 3m --style compact > simctl-launch.log 2>&1 || true
+          tail -60 simctl-launch.log || true
+
       - name: Upload screenshots and transcript
         if: always()
         uses: actions/upload-artifact@v7
@@ -79,4 +90,5 @@ jobs:
             screenshots/
             wda.log
             build.log
+            simctl-launch.log
           if-no-files-found: warn
