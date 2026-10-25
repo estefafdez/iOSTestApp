@@ -76,6 +76,7 @@ jobs:
       - name: Diagnose launch problems
         if: failure()
         run: |
+          xcrun simctl listapps "$DEVICE_ID" | grep -i estefafdez || echo "no estefafdez app registered on the simulator"
           xcrun simctl launch "$DEVICE_ID" com.estefafdez.ios.test.app || true
           sleep 5
           xcrun simctl spawn "$DEVICE_ID" log show --last 3m --style compact > simctl-launch.log 2>&1 || true
