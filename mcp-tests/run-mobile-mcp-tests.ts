@@ -26,7 +26,7 @@ const opt = (name: string, fallback: string | null): string | null => {
 };
 const APP_PATH = opt("app", null);
 const OUT_DIR = opt("out", "./screenshots") as string;
-const BUNDLE_ID = "com.estefafdez.TestApp";
+const BUNDLE_ID = "com.estefafdez.ios.test.app";
 mkdirSync(OUT_DIR, { recursive: true });
 
 const transcript: Array<{ step: string; detail: string; at: string }> = [];
