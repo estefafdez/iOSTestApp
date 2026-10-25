@@ -125,7 +125,37 @@ try {
     await call("mobile_install_app", { device: deviceId, path: APP_PATH });
     record("install", APP_PATH);
   }
-  await call("mobile_launch_app", { device: deviceId, packageName: BUNDLE_ID });
+  // Retry the launch: simctl can fail transiently right after install (exit 4).
+  let launched = false;
+  let lastLaunchError = "";
+  for (let attempt = 1; attempt <= 3 && !launched; attempt++) {
+    try {
+      await call("mobile_launch_app", { device: deviceId, packageName: BUNDLE_ID });
+      launched = true;
+    } catch (err) {
+      lastLaunchError = err instanceof Error ? err.message : String(err);
+      record("launch-retry", `attempt ${attempt} failed: ${lastLaunchError.slice(0, 200)}`);
+      await sleep(5000);
+    }
+  }
+  if (!launched) {
+    // Collect crash reports so the CI artifact explains the failure.
+    try {
+      const crashesRaw = await call("mobile_list_crashes", { device: deviceId });
+      record("crashes", crashesRaw.slice(0, 2000));
+      const crashes = JSON.parse(crashesRaw);
+      const list = Array.isArray(crashes) ? crashes : crashes.crashes ?? [];
+      if (list.length > 0) {
+        const first = list[0];
+        const id = first.id ?? first.name ?? first;
+        const crash = await call("mobile_get_crash", { device: deviceId, id });
+        record("crash-detail", crash.slice(0, 4000));
+      }
+    } catch (diagErr) {
+      record("crash-diag-failed", String(diagErr).slice(0, 300));
+    }
+    throw new Error(`launch failed after retries: ${lastLaunchError.slice(0, 300)}`);
+  }
   await sleep(3000);
   record("launch", BUNDLE_ID);
   await shot("01-home");
