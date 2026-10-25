@@ -30,7 +30,7 @@ jobs:
           xcrun simctl boot "$DEVICE_ID" || true
 
       - name: Reset simulator privacy permissions
-        run: xcrun simctl privacy "$DEVICE_ID" reset all com.estefafdez.TestApp
+        run: xcrun simctl privacy "$DEVICE_ID" reset all com.estefafdez.ios.test.app
 
       - name: Build TestApp for the simulator
         run: |
@@ -76,7 +76,7 @@ jobs:
       - name: Diagnose launch problems
         if: failure()
         run: |
-          xcrun simctl launch "$DEVICE_ID" com.estefafdez.TestApp || true
+          xcrun simctl launch "$DEVICE_ID" com.estefafdez.ios.test.app || true
           sleep 5
           xcrun simctl spawn "$DEVICE_ID" log show --last 3m --style compact > simctl-launch.log 2>&1 || true
           tail -60 simctl-launch.log || true
