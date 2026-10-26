@@ -5,6 +5,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { execSync } from "node:child_process";
 
 interface ScreenElement {
   ref?: string;
@@ -78,8 +79,27 @@ const shot = async (name: string): Promise<void> => {
 
 const elements = async (): Promise<ScreenElement[]> => {
   const raw = await call("mobile_list_elements_on_screen", { device: deviceId });
-  const parsedEls = parseJsonFromText(raw);
-  return Array.isArray(parsedEls) ? parsedEls : parsedEls.elements ?? [];
+  // mobile-mcp 1.0.13 answers with one element per line, not JSON:
+  // @e1 Icon label="Fitness" name="Fitness" id="Fitness" at=28,88 size=68x90 [focused]
+  const out: ScreenElement[] = [];
+  for (const line of raw.split("\n")) {
+    const m = line.match(/^(@e\d+)\s+(\w+)\s+(.*)$/);
+    if (!m) continue;
+    const [, ref, , rest] = m;
+    const attrs: Record<string, string> = {};
+    for (const kv of rest.matchAll(/(\w+)="([^"]*)"/g)) attrs[kv[1]] = kv[2];
+    const at = rest.match(/at=(\d+),(\d+)\s+size=(\d+)x(\d+)/);
+    out.push({
+      ref,
+      id: attrs.id,
+      label: attrs.label,
+      name: attrs.name,
+      text: attrs.text,
+      value: attrs.value,
+      coordinates: at ? { x: Number(at[1]) + Number(at[3]) / 2, y: Number(at[2]) + Number(at[4]) / 2 } : undefined,
+    });
+  }
+  return out;
 };
 
 const findElement = (els: ScreenElement[], needle: string): ScreenElement | undefined => {
@@ -164,6 +184,19 @@ try {
   }
   await sleep(3000);
   record("launch", BUNDLE_ID);
+  // mobilecli 1.0.13 leaves the app running-suspended on this setup (verified in
+  // CI: SpringBoard stays frontmost while the process runs in the background).
+  // A direct simctl launch brings it to the foreground; MCP drives everything else.
+  const onSpringBoard = async (): Promise<boolean> => {
+    const els = await elements();
+    return els.some((e) => e.name === "Home screen icons");
+  };
+  if (await onSpringBoard()) {
+    execSync(`xcrun simctl launch ${deviceId} ${BUNDLE_ID}`);
+    record("launch-foreground", "app was suspended after mobile_launch_app; activated with xcrun simctl launch");
+    await sleep(2000);
+    if (await onSpringBoard()) throw new Error("app did not come to the foreground even after a direct simctl launch");
+  }
   await shot("01-home");
 
   // Scenario 1: form validation
