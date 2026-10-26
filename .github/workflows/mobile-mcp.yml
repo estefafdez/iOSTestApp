@@ -71,7 +71,7 @@ jobs:
         run: |
           APP_PATH=$(find "$GITHUB_WORKSPACE/build" -name "TestApp.app" -maxdepth 4 | head -1)
           echo "Using app at $APP_PATH"
-          node run-mobile-mcp-tests.ts --app "$APP_PATH" --out "$GITHUB_WORKSPACE/screenshots"
+          node run-mobile-mcp-tests.ts --app "$APP_PATH" --out "$GITHUB_WORKSPACE/mcp-tests/screenshots"
 
       - name: Diagnose launch problems
         if: failure()
@@ -88,7 +88,7 @@ jobs:
         with:
           name: mobile-mcp-screenshots
           path: |
-            screenshots/
+            mcp-tests/screenshots/
             wda.log
             build.log
             simctl-launch.log
