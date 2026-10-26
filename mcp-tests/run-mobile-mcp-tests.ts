@@ -43,6 +43,12 @@ const client = new Client({ name: "mobile-mcp-ci-client", version: "1.0.0" });
 await client.connect(transport);
 record("connect", "connected to mobile-mcp server");
 
+const parseJsonFromText = (raw: string): any => {
+  const start = raw.search(/[\[{]/);
+  if (start < 0) throw new Error(`no JSON in tool response: ${raw.slice(0, 200)}`);
+  return JSON.parse(raw.slice(start));
+};
+
 const call = async (name: string, callArgs: Record<string, unknown> = {}): Promise<string> => {
   const res = await client.callTool({ name, arguments: callArgs });
   const text = (res.content as Array<{ text?: string }> | undefined)
@@ -54,7 +60,7 @@ const call = async (name: string, callArgs: Record<string, unknown> = {}): Promi
 
 // --- device selection ---
 const devicesRaw = await call("mobile_list_available_devices");
-const parsed = JSON.parse(devicesRaw);
+const parsed = parseJsonFromText(devicesRaw);
 const devices = Array.isArray(parsed) ? parsed : parsed.devices ?? [];
 if (devices.length === 0) {
   record("devices", "NO DEVICES AVAILABLE - cannot run");
@@ -72,7 +78,7 @@ const shot = async (name: string): Promise<void> => {
 
 const elements = async (): Promise<ScreenElement[]> => {
   const raw = await call("mobile_list_elements_on_screen", { device: deviceId });
-  const parsedEls = JSON.parse(raw);
+  const parsedEls = parseJsonFromText(raw);
   return Array.isArray(parsedEls) ? parsedEls : parsedEls.elements ?? [];
 };
 
@@ -143,7 +149,7 @@ try {
     try {
       const crashesRaw = await call("mobile_list_crashes", { device: deviceId });
       record("crashes", crashesRaw.slice(0, 2000));
-      const crashes = JSON.parse(crashesRaw);
+      const crashes = parseJsonFromText(crashesRaw);
       const list = Array.isArray(crashes) ? crashes : crashes.crashes ?? [];
       if (list.length > 0) {
         const first = list[0];
