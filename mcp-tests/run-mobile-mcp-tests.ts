@@ -199,6 +199,15 @@ try {
   }
   await shot("01-home");
 
+  // Fresh app state between sub-scenarios: terminate, then a direct simctl
+  // launch (mobile_launch_app leaves the process suspended in this setup).
+  const relaunchFresh = async (): Promise<void> => {
+    try { await call("mobile_terminate_app", { device: deviceId, packageName: BUNDLE_ID }); } catch { /* not running */ }
+    execSync(`xcrun simctl launch ${deviceId} ${BUNDLE_ID}`);
+    record("relaunch", "terminate + direct simctl launch for a fresh app state");
+    await sleep(2500);
+  };
+
   // Scenario 1: form validation
   await tapText("open_form_button");
   await sleep(1000);
@@ -208,17 +217,18 @@ try {
   await typeInto("form_password_textbox", "supersecret");
   await tapText("form_submit_button");
   await assertVisible("El email no tiene un formato válido", "03-form-error-email");
+  await relaunchFresh();
+  await tapText("open_form_button");
+  await sleep(1000);
   await typeInto("form_email_textbox", "qa@example.com");
   await typeInto("form_password_textbox", "supersecret");
   await tapText("form_submit_button");
   await assertVisible("form_success_label", "04-form-success");
   await shot("05-form-done");
 
-  // Scenario 2: list states
-  await call("mobile_press_button", { device: deviceId, button: "HOME" });
-  await sleep(1500);
-  await call("mobile_launch_app", { device: deviceId, packageName: BUNDLE_ID });
-  await sleep(2000);
+  // Scenario 2: list states — restart so we land on the app home screen,
+  // not on the still-presented form sheet.
+  await relaunchFresh();
   await tapText("open_list_button");
   await sleep(1500);
   await assertVisible("Caso de prueba: login", "06-list-success");
