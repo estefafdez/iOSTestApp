@@ -1,0 +1,95 @@
+name: mobile-mcp lab
+
+# Runs on pull requests that touch this workflow or the mcp-tests folder,
+# so the lab can be reviewed (with its screenshots) before merging.
+# After it lands on the default branch it can also be run manually.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/mobile-mcp.yml"
+      - "mcp-tests/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-mcp-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pick and boot an iPhone simulator
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available iPhone | grep -m1 -oE '[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}')
+          echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+          xcrun simctl boot "$DEVICE_ID" || true
+
+      - name: Reset simulator privacy permissions
+        run: xcrun simctl privacy "$DEVICE_ID" reset all com.estefafdez.ios.test.app
+
+      - name: Build TestApp for the simulator
+        run: |
+          set -o pipefail
+          xcodebuild build -project TestApp.xcodeproj -scheme TestApp \
+            -destination "platform=iOS Simulator,id=$DEVICE_ID" \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO 2>&1 | tee build.log
+
+      - name: Start WebDriverAgent on the simulator
+        run: |
+          git clone --depth 1 https://github.com/appium/WebDriverAgent.git
+          cd WebDriverAgent
+          nohup xcodebuild -project WebDriverAgent.xcodeproj \
+            -scheme WebDriverAgentRunner \
+            -destination "platform=iOS Simulator,id=$DEVICE_ID" \
+            test CODE_SIGNING_ALLOWED=NO > ../wda.log 2>&1 &
+          echo "WebDriverAgent is building and launching in the background"
+
+      - name: Wait for WebDriverAgent
+        run: |
+          for i in $(seq 1 60); do
+            if curl -s http://localhost:8100/status | grep -q sessionId; then
+              echo "WebDriverAgent is up"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "WebDriverAgent did not start in time"
+          tail -50 wda.log
+          exit 1
+
+      - name: Install the MCP client dependency
+        working-directory: mcp-tests
+        run: npm install @modelcontextprotocol/sdk
+
+      - name: Run the mobile-mcp scenarios with screenshots
+        working-directory: mcp-tests
+        run: |
+          APP_PATH=$(find "$GITHUB_WORKSPACE/build" -name "TestApp.app" -maxdepth 4 | head -1)
+          echo "Using app at $APP_PATH"
+          node run-mobile-mcp-tests.ts --app "$APP_PATH" --out "$GITHUB_WORKSPACE/mcp-tests/screenshots"
+
+      - name: Diagnose launch problems
+        if: failure()
+        run: |
+          xcrun simctl listapps "$DEVICE_ID" | grep -i estefafdez || echo "no estefafdez app registered on the simulator"
+          xcrun simctl launch "$DEVICE_ID" com.estefafdez.ios.test.app || true
+          sleep 5
+          xcrun simctl spawn "$DEVICE_ID" log show --last 3m --style compact > simctl-launch.log 2>&1 || true
+          tail -60 simctl-launch.log || true
+
+      - name: Upload screenshots and transcript
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mobile-mcp-screenshots
+          path: |
+            mcp-tests/screenshots/
+            wda.log
+            build.log
+            simctl-launch.log
+          if-no-files-found: warn
