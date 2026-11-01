@@ -41,8 +41,11 @@ appId: com.estefafdez.ios.test.app
 - takeScreenshot:
     path: 05-form-success
 
-# List scenario: success, error and retry
-- back
+# List scenario: success, error and retry.
+# iOS has no system back button and Maestro's back command is Android/Web
+# only, so relaunch with a clean state to land on the home screen.
+- launchApp:
+    clearState: true
 - tapOn:
     id: "open_list_button"
 - assertVisible:
