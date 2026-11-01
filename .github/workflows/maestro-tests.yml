@@ -11,13 +11,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   maestro-tests:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Pick and boot an iPhone simulator
         run: |
@@ -45,6 +47,18 @@ jobs:
           echo "Using app at $APP_PATH"
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
           maestro test --test-output-dir=maestro-results .maestro/flow.yaml
+
+      - name: Commit screenshots to the PR branch
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p maestro-screenshots
+          cp maestro-results/*/*/takeScreenshot/*.png maestro-screenshots/
+          cp maestro-results/*/*/commands.json maestro-screenshots/commands.json
+          git add maestro-screenshots/
+          git commit -m "test: add maestro lab screenshots from CI run [skip ci]"
+          git push
 
       - name: Upload screenshots and results
         if: always()
