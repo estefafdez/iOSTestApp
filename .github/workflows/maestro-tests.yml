@@ -51,11 +51,10 @@ jobs:
       - name: Commit screenshots to the PR branch
         if: success()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "estefafdez"
+          git config user.email "estefafdez@gmail.com"
           mkdir -p maestro-screenshots
           cp maestro-results/*/*/takeScreenshot/*.png maestro-screenshots/
-          cp maestro-results/*/*/commands.json maestro-screenshots/commands.json
           git add maestro-screenshots/
           git commit -m "test: add maestro lab screenshots from CI run [skip ci]"
           git push
