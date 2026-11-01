@@ -41,7 +41,7 @@ jobs:
           mkdir -p exported lab-screenshots
           xcrun xcresulttool export attachments --path LabResults.xcresult --output-path exported
           cat exported/manifest.json
-          jq -r '.[] | [.exportedFileName, .suggestedHumanReadableName] | @tsv' exported/manifest.json | while IFS=$'\t' read -r file human; do
+          jq -r '.attachments[] | [.exportedFileName, .suggestedHumanReadableName] | @tsv' exported/manifest.json | while IFS=$'\t' read -r file human; do
             base="${human%%_*}"
             mv "exported/$file" "lab-screenshots/${base}.png"
           done
