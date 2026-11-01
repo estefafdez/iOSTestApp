@@ -38,14 +38,19 @@ jobs:
           fi
       - name: Export and rename screenshots
         run: |
+          set -euo pipefail
           mkdir -p exported lab-screenshots
           xcrun xcresulttool export attachments --path LabResults.xcresult --output-path exported
-          cat exported/manifest.json
-          jq -r '.attachments[] | [.exportedFileName, .suggestedHumanReadableName] | @tsv' exported/manifest.json | while IFS=$'\t' read -r file human; do
+          jq -r '.[].attachments[] | [.exportedFileName, .suggestedHumanReadableName] | @tsv' exported/manifest.json | while IFS=$'\t' read -r file human; do
             base="${human%%_*}"
             mv "exported/$file" "lab-screenshots/${base}.png"
           done
-          ls -la lab-screenshots/
+          count=$(ls lab-screenshots/*.png | wc -l | tr -d ' ')
+          echo "Exported $count screenshots"
+          if [ "$count" -ne 10 ]; then
+            echo "::error::expected 10 screenshots, got $count"
+            exit 1
+          fi
       - name: Commit screenshots to this branch
         run: |
           git config user.name "estefafdez"
