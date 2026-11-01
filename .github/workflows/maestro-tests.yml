@@ -35,6 +35,7 @@ jobs:
       - name: Install Maestro CLI
         run: |
           curl -fsSL "https://get.maestro.mobile.dev" | bash
+          export PATH="$HOME/.maestro/bin:$PATH"
           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
           maestro --version
 
@@ -43,7 +44,7 @@ jobs:
           APP_PATH=$(find "$GITHUB_WORKSPACE/build" -name "TestApp.app" -maxdepth 4 | head -1)
           echo "Using app at $APP_PATH"
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
-          maestro test --output maestro-results .maestro/flow.yaml
+          maestro test --test-output-dir=maestro-results .maestro/flow.yaml
 
       - name: Upload screenshots and results
         if: always()
