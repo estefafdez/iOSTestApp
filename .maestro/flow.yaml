@@ -1,0 +1,58 @@
+appId: com.estefafdez.ios.test.app
+---
+- launchApp
+- takeScreenshot:
+    path: 01-home
+
+# Form scenario: empty submit shows an error
+- tapOn:
+    id: "open_form_button"
+- assertVisible:
+    id: "form_email_textbox"
+- takeScreenshot:
+    path: 02-form
+- tapOn:
+    id: "form_submit_button"
+- assertVisible: "Completa todos los campos"
+- takeScreenshot:
+    path: 03-form-error-empty
+
+# Invalid email shows its own error
+- tapOn:
+    id: "form_email_textbox"
+- inputText: "no-es-un-email"
+- tapOn:
+    id: "form_password_textbox"
+- inputText: "password123"
+- tapOn:
+    id: "form_submit_button"
+- assertVisible: "El email no tiene un formato válido"
+- takeScreenshot:
+    path: 04-form-error-email
+
+# Valid form succeeds
+- tapOn:
+    id: "form_email_textbox"
+- eraseText
+- inputText: "qa@example.com"
+- tapOn:
+    id: "form_submit_button"
+- assertVisible: "Registro correcto"
+- takeScreenshot:
+    path: 05-form-success
+
+# List scenario: success, error and retry
+- back
+- tapOn:
+    id: "open_list_button"
+- assertVisible:
+    id: "list_table"
+- assertVisible: "Caso de prueba: login"
+- takeScreenshot:
+    path: 06-list-success
+- tapOn: "Error"
+- assertVisible: "No se pudo cargar la lista"
+- assertVisible:
+    id: "list_retry_button"
+- takeScreenshot:
+    path: 07-list-error
