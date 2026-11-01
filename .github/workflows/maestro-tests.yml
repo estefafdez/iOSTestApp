@@ -1,0 +1,56 @@
+name: maestro lab
+
+# Runs on pull requests that touch this workflow or the .maestro folder,
+# so the lab can be reviewed (with its screenshots) before merging.
+# After it lands on the default branch it can also be run manually.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/maestro-tests.yml"
+      - ".maestro/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  maestro-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Pick and boot an iPhone simulator
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available iPhone | grep -m1 -oE '[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}')
+          echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+          xcrun simctl boot "$DEVICE_ID" || true
+
+      - name: Build TestApp for the simulator
+        run: |
+          set -o pipefail
+          xcodebuild build -project TestApp.xcodeproj -scheme TestApp \
+            -destination "platform=iOS Simulator,id=$DEVICE_ID" \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO 2>&1 | tee build.log
+
+      - name: Install Maestro CLI
+        run: |
+          curl -fsSL "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+          maestro --version
+
+      - name: Run the Maestro flow
+        run: |
+          APP_PATH=$(find "$GITHUB_WORKSPACE/build" -name "TestApp.app" -maxdepth 4 | head -1)
+          echo "Using app at $APP_PATH"
+          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
+          maestro test --output maestro-results .maestro/flow.yaml
+
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: maestro-screenshots
+          path: |
+            maestro-results/
+            build.log
+          if-no-files-found: warn
