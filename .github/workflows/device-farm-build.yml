@@ -1,0 +1,34 @@
+name: Device farm build
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  build-artifacts:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build app and UI tests for a real iOS device
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing -project TestApp.xcodeproj -scheme TestApp \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath DerivedData \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee xcodebuild.log
+      - name: Package the IPA
+        run: |
+          mkdir -p Payload
+          cp -R DerivedData/Build/Products/Debug-iphoneos/TestApp.app Payload/
+          zip -qr TestApp.ipa Payload
+      - name: Package the XCUITest bundle
+        run: |
+          cd DerivedData/Build/Products/Debug-iphoneos
+          zip --symlinks -qr "$GITHUB_WORKSPACE/TestAppUITests.zip" TestAppUITests-Runner.app
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: device-farm-build
+          path: |
+            TestApp.ipa
+            TestAppUITests.zip
